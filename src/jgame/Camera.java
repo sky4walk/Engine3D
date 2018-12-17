@@ -5,8 +5,13 @@
 package jgame;
 
 public class Camera {
+    // Player position.
     private myVector pos        = new myVector();
+    // direction in which the player looks.
     private myVector dir        = new myVector();
+    // perpendicular vector to direction Dir. 
+    // Points to farthest edge of camera field.
+    // The other fathest side is the negative side.
     private myVector plane      = new myVector();
     private boolean left        = false;
     private boolean right       = false;

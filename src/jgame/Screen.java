@@ -32,12 +32,13 @@ public class Screen {
         // raycast
         for(int x = 0; x < width; x++) {                    
             double cameraX = 2 * x / (double)(width) -1;
+            // ray position 
             myVector rayDir = world.getCam().getDir().add(world.getCam().getPlane().scale(cameraX));
             
             double rayDirX = world.getCam().getDir().getX() + world.getCam().getPlane().getX() * cameraX;
             double rayDirY = world.getCam().getDir().getY() + world.getCam().getPlane().getY() * cameraX;
             
-            //Map position
+            //position in Map
             myVector mapPos = new myVector(
                 (int)world.getCam().getPos().getX(),
                 (int)world.getCam().getPos().getY(),
