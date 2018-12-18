@@ -16,6 +16,13 @@ public class Screen {
         height      = h;
     }
 
+    private myVector getRayDirPos(double cameraX) {
+        myVector dir = world.getCam().getDir();
+        myVector plane = world.getCam().getPlane();
+        myVector scalePlane = plane.scale(cameraX);
+        myVector rayDir = dir.add(scalePlane);
+        return rayDir;
+    }
     public int[] update(int[] pixels) {
         // obere bildhaelfte dunkles grau
         for ( int n = 0; n < pixels.length/2; n++ ) {
@@ -30,10 +37,11 @@ public class Screen {
             }
         }
         // raycast
+        // only in x direction because y will be generated from the same wall position
         for(int x = 0; x < width; x++) {                    
             double cameraX = 2 * x / (double)(width) -1;
             // ray position 
-            myVector rayDir = world.getCam().getDir().add(world.getCam().getPlane().scale(cameraX));
+            myVector rayDir = getRayDirPos(cameraX);
             
             double rayDirX = world.getCam().getDir().getX() + world.getCam().getPlane().getX() * cameraX;
             double rayDirY = world.getCam().getDir().getY() + world.getCam().getPlane().getY() * cameraX;
