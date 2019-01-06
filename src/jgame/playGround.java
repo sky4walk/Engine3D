@@ -30,7 +30,7 @@ public class playGround {
     };
     private double MOVE_SPEED       = .08;
     private double ROTATION_SPEED   = .045;
-    private Camera cam = new Camera(4.5, 4.5, 1, 0, 0, -.66);
+    private Camera cam = new Camera(4.5, 4.5, 1, 0, 0, -0.66);
     private Screen screen;
     private ArrayList<Texture> textures = new ArrayList<Texture>();
 
