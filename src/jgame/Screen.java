@@ -16,7 +16,7 @@ public class Screen {
         height      = h;
     }
 
-    public int[] update(int[] pixels) {
+    private void BackGround(int[] pixels) {
         // obere bildhaelfte dunkles grau
         for ( int n = 0; n < pixels.length/2; n++ ) {
             if ( pixels[n] != Color.DARK_GRAY.getRGB() ) {
@@ -29,6 +29,9 @@ public class Screen {
                 pixels[i] = Color.gray.getRGB();
             }
         }
+    }
+    public int[] update(int[] pixels) {
+        BackGround(pixels);
         // raycast
         for(int x = 0; x < width; x++) {                    
             double cameraX = 2 * x / (double)(width) -1;
