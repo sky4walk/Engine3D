@@ -16,9 +16,6 @@ public class Screen {
         height      = h;
     }
 
-<<<<<<< HEAD
-    private void BackGround(int[] pixels) {
-=======
     private myVector getRayDirPos(double cameraX) {
         myVector dir = world.getCam().getDir();
         myVector plane = world.getCam().getPlane();
@@ -26,8 +23,8 @@ public class Screen {
         myVector rayDir = dir.add(scalePlane);
         return rayDir;
     }
-    public int[] update(int[] pixels) {
->>>>>>> c67e7c96e8b0e2fc3a7449f95dd086eec06bab33
+    
+    private void BackGround(int[] pixels) {
         // obere bildhaelfte dunkles grau
         for ( int n = 0; n < pixels.length/2; n++ ) {
             if ( pixels[n] != Color.DARK_GRAY.getRGB() ) {
@@ -126,6 +123,8 @@ public class Screen {
             int drawEnd = lineHeight/2 + height/2;
             if(drawEnd >= height) 
                 drawEnd = height - 1;
+            
+            
             //add a texture
             int texNum = world.getVal(mapX, mapY) - 1;
             double wallX;//Exact position of where wall was hit
