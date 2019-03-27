@@ -63,27 +63,15 @@ public class Screen {
             );
             
             //Figure out the step direction and initial distance to a side
-            stepDirection(step,sideDist,deltaDist,mapPos,rayDir);
-            int side = hitWallSide(step,sideDist,deltaDist,mapPos);
-            
+            stepDirection(         step,sideDist,deltaDist,mapPos,rayDir);
+            int side = hitWallSide(step,sideDist,deltaDist,mapPos);            
             //Calculate distance to the point of impact
-            double perpWallDist;
-            if( side == 0)
-                perpWallDist = Math.abs((mapPos.getX() - world.getCam().getPos().getX() + (1 - step.getX()) / 2) / rayDir.getX());
-            else
-                perpWallDist = Math.abs((mapPos.getY() - world.getCam().getPos().getY() + (1 - step.getY()) / 2) / rayDir.getY());	
-            
-            //Now calculate the height of the wall based on the distance from the camera
-            int lineHeight;
-            if(perpWallDist > 0) 
-                lineHeight = Math.abs((int)(height / perpWallDist));
-            else 
-                lineHeight = height;
+            int lineHeight = getLineHeight(step,mapPos,rayDir,side);
             
             //calculate lowest and highest pixel to fill in current stripe
-            int drawStart = -lineHeight/2+ height/2;
+            int drawStart = -lineHeight/2 + height/2;
             if(drawStart < 0)
-                drawStart = 0;
+                drawStart = 0;            
             int drawEnd = lineHeight/2 + height/2;
             if(drawEnd >= height) 
                 drawEnd = height - 1;                        
@@ -91,8 +79,23 @@ public class Screen {
             addTexture(pixels,x,side,mapPos,step,rayDir,drawStart,drawEnd,lineHeight);
         }
         return pixels;
+    }    
+    private int getLineHeight(myVector step,myVector mapPos,  myVector rayDir,int side) {
+        int lineHeight;
+        //Calculate distance to the point of impact
+        double perpWallDist;
+        if( side == 0)
+            perpWallDist = Math.abs((mapPos.getX() - world.getCam().getPos().getX() + (1 - step.getX()) / 2) / rayDir.getX());
+        else
+            perpWallDist = Math.abs((mapPos.getY() - world.getCam().getPos().getY() + (1 - step.getY()) / 2) / rayDir.getY());	
+            
+        //Now calculate the height of the wall based on the distance from the camera
+        if(perpWallDist > 0) 
+            lineHeight = Math.abs((int)(height / perpWallDist));
+        else 
+            lineHeight = height;
+        return lineHeight;
     }
-    
     private void stepDirection(
             myVector step,
             myVector sideDist,
@@ -141,7 +144,7 @@ public class Screen {
         }
         return side;
     }
-    void addTexture(
+    private void addTexture(
             int[] pixels, int posX, int side,
             myVector mapPos, 
             myVector step, 
