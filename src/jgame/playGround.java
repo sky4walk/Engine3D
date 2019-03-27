@@ -47,6 +47,9 @@ public class playGround {
     public int getSizeY() {
         return defaultMap.length;        
     }
+    public int getVal(myVector pos) {
+        return getVal((int)pos.getX(),(int)pos.getY());
+    }
     public int getVal(int x, int y) {
         if ( 0 <= x && x < getSizeX() &&
              0 <= y && y < getSizeY() ) {
